@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.music.demo.mapper.PlaylistMapper">
+    <delete id="delete">
+        DELETE FROM playlist WHERE id = #{id}
+    </delete>
+    <select id="findByUserId" resultType="com.music.demo.dao.Playlist">
+        SELECT * FROM playlist WHERE user_id = #{userId}
+    </select>
+    <insert id="insert">
+        INSERT INTO playlist (user_id, name, created_at)
+        VALUES (#{userId}, #{name}, #{createdAt})
+    </insert>
+</mapper>
