@@ -9,7 +9,7 @@
     </select>
     <update id="updateUser">
         UPDATE user
-        SET gender = #{gender}, hobby = #{hobby}, updated_at = CURRENT_TIMESTAMP
+        SET gender = #{gender}, hobby = #{hobby},username = #{username},updated_at = CURRENT_TIMESTAMP
         WHERE id = #{id}
     </update>
 </mapper>

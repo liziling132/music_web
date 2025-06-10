@@ -3,9 +3,15 @@
 <mapper namespace="com.music.demo.mapper.MvMapper">
 
     <select id="findById" resultType="com.music.demo.dao.Mv">
-         SELECT * FROM mv WHERE id = #{id}
+        SELECT * FROM mv WHERE id = #{id}
     </select>
+
     <select id="findRecommendedMvsByCategoryId" resultType="com.music.demo.dao.Mv">
-        SELECT m.* FROM mv m WHERE m.category_id = #{categoryId} ORDER BY RAND() LIMIT 5
+        SELECT m.*
+        FROM mv m
+                 JOIN mv_category mc ON m.id = mc.mv_id
+        WHERE mc.category_id = #{categoryId}
+        ORDER BY RAND()
+            LIMIT 5
     </select>
 </mapper>

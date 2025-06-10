@@ -8,6 +8,11 @@
         SELECT * FROM song
     </select>
     <select id="findRecommendedSongsByCategoryId" resultType="com.music.demo.dao.Song">
-        SELECT s.* FROM song s WHERE s.category_id = #{categoryId} ORDER BY RAND() LIMIT 10
+        SELECT s.*
+        FROM song s
+                 JOIN song_category sc ON s.id = sc.song_id
+        WHERE sc.category_id = #{categoryId}
+        ORDER BY RAND()
+            LIMIT 10
     </select>
 </mapper>

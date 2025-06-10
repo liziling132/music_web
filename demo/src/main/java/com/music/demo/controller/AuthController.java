@@ -1,6 +1,7 @@
 package com.music.demo.controller;
 
 import com.music.demo.dao.User;
+import com.music.demo.result.Result;
 import com.music.demo.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,29 +15,22 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    // 登录接口
     @PostMapping("/login")
-    public String login(@RequestParam String username,
-                        @RequestParam String password,
-                        HttpSession session) {
+    public Result<String> login(@RequestParam String username,
+                                @RequestParam String password,
+                                HttpSession session) {
         User user = userService.findUserByUsername(username);
-        if (user != null && user.getPassword().equals(password)) {
-            session.setAttribute("user", user);
-            return "Login success";
+
+        if (user == null) {
+            return Result.error(401, "用户不存在");
         }
-        return "Invalid credentials";
-    }
 
-//    // 获取当前登录用户信息
-//    @GetMapping("/me")
-//    public User getCurrentUser(HttpSession session) {
-//        return (User) session.getAttribute("user");
-//    }
+        if (!user.getPassword().equals(password)) {
+            return Result.error(401, "密码错误");
+        }
 
-    // 登出
-    @PostMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "Logged out";
+        session.setAttribute("user", user);
+        return Result.success("登录成功");
     }
 }
+

@@ -8,11 +8,11 @@ public class IndexController {
 
     @GetMapping("/")
     public String index() {
-        return "forward:/index.html";  // 假设 index.html 是入口文件
+        return "forward:/index.html";  //  index.html 是入口文件
     }
 
     @GetMapping("/**")
     public String fallback() {
-        return "forward:/index.html";  // 支持 Vue 路由刷新
+        return "forward:/index.html";  // Vue 路由刷新
     }
 }
