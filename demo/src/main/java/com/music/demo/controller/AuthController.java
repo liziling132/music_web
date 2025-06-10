@@ -33,4 +33,3 @@ public class AuthController {
         return Result.success("登录成功");
     }
 }
-

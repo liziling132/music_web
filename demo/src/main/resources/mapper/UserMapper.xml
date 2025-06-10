@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.music.demo.mapper.UserMapper">
+    <insert id="insertUser">
+        INSERT INTO user (username, password, gender, hobby, created_at, updated_at)
+        VALUES (#{username}, #{password}, #{gender}, #{hobby}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+    </insert>
     <select id="findById" resultType="com.music.demo.dao.User">
         select * from user where id = #{id}
     </select>
