@@ -5,6 +5,11 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+
 web:
   encoding:
     charset: UTF-8
@@ -18,3 +23,7 @@ mybatis:
 
 server:
   port: 3700
+
+logging:
+  level:
+    com.music.demo.mapper: DEBUG  # 设置 Mapper 包的日志级别为 DEBUG

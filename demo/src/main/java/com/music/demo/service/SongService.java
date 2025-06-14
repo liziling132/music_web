@@ -3,6 +3,7 @@ package com.music.demo.service;
 import com.music.demo.dao.Song;
 import com.music.demo.mapper.SongMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,8 +1,8 @@
-
 package com.music.demo.service;
 
 import com.music.demo.dao.User;
 import com.music.demo.mapper.UserMapper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -12,12 +12,13 @@ public class UserService {
 
     private final UserMapper userMapper;
 
-    // 构造器注入
     public UserService(UserMapper userMapper) {
         this.userMapper = userMapper;
     }
 
+    @Cacheable(value = "user", key = "#userId")
     public User getUserProfile(Long userId) {
+        System.out.println("Querying database for user: " + userId); // 明确是否每次都进方法
         return userMapper.findById(userId);
     }
 
@@ -25,15 +26,14 @@ public class UserService {
         userMapper.updateUser(user);
     }
 
+    @Cacheable(value = "user", key = "#username")
     public User findUserByUsername(String username) {
         return userMapper.findByUsername(username);
     }
 
     public void registerUser(User user) {
-        // 直接保存明文密码
         user.setPassword(user.getPassword());
 
-        // 设置创建和更新时间
         LocalDateTime now = LocalDateTime.now();
         user.setCreatedAt(now);
         user.setUpdatedAt(now);
